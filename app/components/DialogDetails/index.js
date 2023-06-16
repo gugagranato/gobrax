@@ -112,6 +112,8 @@ export function DialogDetailsComponent({ isOpen, closeModal }) {
           },
         }
       );
+
+      if (response.status === 200) {}
     } catch (error) {
       console.error(error);
     }
@@ -197,7 +199,7 @@ export function DialogDetailsComponent({ isOpen, closeModal }) {
                   </div>
                   <div className="mb-6">
                     <label htmlFor="frota_total" className="block mb-2 text-sm font-medium text-gray-900">Qual melhor horário?</label>
-                    <div className='row gap-2'>
+                    <div className='flex flex-col gap-2'>
                       <div class="flex items-center mr-4">
                         <input {...register('horario1')} id="yellow-checkbox" type="checkbox" value="9:00" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label htmlFor="9:00" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">9:00</label>

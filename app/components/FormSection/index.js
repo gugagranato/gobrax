@@ -73,27 +73,27 @@ function FormSection() {
         {/* <FormComponent /> */}
         <div className='my-6 flex flex-col md:flex-row gap-6 lg:gap-10'>
           <div>
-            <label htmlFor="input-group-1" className="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Qtd de caminhões</label>
+            <label htmlFor="input-group-1" className="block mb-2 text-sm font-semibold text-gray-900 ">Qtd de caminhões</label>
             <div className="">
-              <input type="number" {...register('trucksQtt')} id="input-group-1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5  dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="200" />
+              <input type="number" {...register('trucksQtt')} id="input-group-1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5     " placeholder="200" />
             </div>
           </div>
           <div>
-            <label htmlFor="input-group-1" className="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Km mensal rodado</label>
+            <label htmlFor="input-group-1" className="block mb-2 text-sm font-semibold text-gray-900 ">Km mensal rodado</label>
             <div className="">
-              <input type="number" {...register('kmMonth')} id="input-group-1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5  dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="200km" />
+              <input type="number" {...register('kmMonth')} id="input-group-1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5     " placeholder="200km" />
             </div>
           </div>
           <div>
-            <label htmlFor="input-group-1" className="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Média atual</label>
+            <label htmlFor="input-group-1" className="block mb-2 text-sm font-semibold text-gray-900 ">Média atual</label>
             <div className="">
-              <input type="number" {...register('actualAverage')} id="input-group-1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5  dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="12,4" />
+              <input type="number" {...register('actualAverage')} id="input-group-1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5     " placeholder="12,4" />
             </div>
           </div>
           <div>
-            <label htmlFor="input-group-1" className="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Valor do diesel</label>
+            <label htmlFor="input-group-1" className="block mb-2 text-sm font-semibold text-gray-900 ">Valor do diesel</label>
             <div className="">
-              <input type="number" {...register('dieselAmount')} id="input-group-1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5  dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="R$ 3,14" />
+              <input type="number" {...register('dieselAmount')} id="input-group-1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5     " placeholder="R$ 3,14" />
             </div>
           </div>
           {loading && (
@@ -107,21 +107,21 @@ function FormSection() {
           <button
             onClick={() => setProfile('Conservative')}
             type="button"
-            className={`text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-1 focus:outline-none focus:ring-gray-700 font-medium rounded-lg text-sm px-1.5 md:px-5 py-1 text-center mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 ${profile === 'Conservative' ? 'bg-gray-900 text-white' : ''}`}
+            className={`text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-1 focus:outline-none focus:ring-gray-700 font-medium rounded-lg text-sm px-1.5 md:px-5 py-1 text-center mb-2     dark:focus:ring-gray-800 ${profile === 'Conservative' ? 'bg-gray-900 text-white' : ''}`}
           >
             Conservador
           </button>
           <button
             onClick={() => setProfile('Moderate')}
             type="button"
-            className={`text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-1 focus:outline-none focus:ring-gray-700 font-medium rounded-lg text-sm px-1.5 md:px-5 py-1 text-center mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 ${profile === 'Moderate' ? 'bg-gray-900 text-white' : ''}`}
+            className={`text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-1 focus:outline-none focus:ring-gray-700 font-medium rounded-lg text-sm px-1.5 md:px-5 py-1 text-center mb-2     dark:focus:ring-gray-800 ${profile === 'Moderate' ? 'bg-gray-900 text-white' : ''}`}
           >
             Moderado
           </button>
           <button
             onClick={() => setProfile('HighPerformance')}
             type="button"
-            className={`text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-1 focus:outline-none focus:ring-gray-700 font-medium rounded-lg text-sm px-1.5 md:px-5 py-1 text-center mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 ${profile === 'HighPerformance' ? 'bg-gray-900 text-white' : ''}`}
+            className={`text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-1 focus:outline-none focus:ring-gray-700 font-medium rounded-lg text-sm px-1.5 md:px-5 py-1 text-center mb-2     dark:focus:ring-gray-800 ${profile === 'HighPerformance' ? 'bg-gray-900 text-white' : ''}`}
           >
             Alta performance
           </button>

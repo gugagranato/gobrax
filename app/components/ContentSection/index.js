@@ -6,6 +6,7 @@ import { DialogDetailsComponent } from '../DialogDetails';
 
 function ContentSection() {
   let [isOpen, setIsOpen] = useState(false)
+  let [isOpenDetails, setIsOpenDetails] = useState(false)
 
   function closeModal() {
     setIsOpen(false)
@@ -13,6 +14,14 @@ function ContentSection() {
 
   function openModal() {
     setIsOpen(true)
+  }
+
+  function closeModalDetails() {
+    setIsOpenDetails(false)
+  }
+
+  function openModalDetails() {
+    setIsOpenDetails(true)
   }
   return (
     <section>
@@ -81,12 +90,13 @@ function ContentSection() {
           </p>
         </div>
         <div className='flex justify-center md:justify-start mt-10 md:mt-16'>
-          <button onClick={openModal} className="mb-6 bg-yellow-300 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-full max-w-[50%] min-w-[320px] min-h-[50px]">
+          <button onClick={openModalDetails} className="mb-6 bg-yellow-300 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-full max-w-[50%] min-w-[320px] min-h-[50px]">
             OBTER ANÁLISE DETALHADA
           </button>
         </div>
       </div>
       <DialogDetailsComponent isOpen={isOpen} closeModal={closeModal} />
+      <DialogComponent isOpen={isOpenDetails} closeModal={closeModalDetails} />
     </section>
   )
 }

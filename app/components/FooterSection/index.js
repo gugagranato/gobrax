@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image';
 import { DialogComponent } from '../Dialog';
+import { DialogDetailsComponent } from '../DialogDetails';
 
 function FooterSection() {
   let [isOpen, setIsOpen] = useState(false)
@@ -51,7 +52,7 @@ function FooterSection() {
           </div>
         </div>
       </div>
-      <DialogComponent isOpen={isOpen} closeModal={closeModal} />
+      <DialogDetailsComponent isOpen={isOpen} closeModal={closeModal} />
     </section>
   )
 }

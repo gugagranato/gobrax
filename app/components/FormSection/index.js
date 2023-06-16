@@ -30,17 +30,16 @@ function FormSection() {
   const calculate = useDebouncedCallback(async () => {
     try {
       setLoading(true)
-      const responseDisconnected = await axios.get(`https://gateway-v3.gobrax.com.br:8889/gobrax-calculate/${dieselAmountWatch}/${actualAveragetWatch}/${trucksQttWatch}/${kmMonthWatch}/Disconneted`);
-      const responseWithProfile = await axios.get(`https://gateway-v3.gobrax.com.br:8889/gobrax-calculate/${dieselAmountWatch}/${actualAveragetWatch}/${trucksQttWatch}/${kmMonthWatch}/${profile}`);
-      if (responseWithProfile.status === 200 && responseDisconnected.status === 200) {
+      const response = await axios.get(`https://gateway-v3.gobrax.com.br:8889/gobrax-calculate/${dieselAmountWatch}/${actualAveragetWatch}/${trucksQttWatch}/${kmMonthWatch}/${profile}`);
+      if (response.status === 200) {
         const modelValueSpent = {
           isDisconectedTruck: {
-            yearly: responseDisconnected.data.data?.anualSpent,
-            monthly: responseDisconnected.data.data?.monthSpent,
+            yearly: response.data.data?.disconnected.anual,
+            monthly: response.data.data?.disconnected.month,
           },
           isConnectedTruck: {
-            yearly: responseWithProfile.data.data?.anualSpent,
-            monthly: responseWithProfile.data.data?.monthSpent,
+            yearly: response.data.data?.specific.anual,
+            monthly: response.data.data?.specific.month,
           },
         }
         setValues(modelValueSpent)

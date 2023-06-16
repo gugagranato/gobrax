@@ -2,8 +2,7 @@
 import React, { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import axios from 'axios';
-import { Controller, useForm } from 'react-hook-form';
-import Datepicker from "react-tailwindcss-datepicker";
+import { useForm } from 'react-hook-form';
 
 export function DialogDetailsComponent({ isOpen, closeModal }) {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -152,25 +151,30 @@ export function DialogDetailsComponent({ isOpen, closeModal }) {
                 </Dialog.Title>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="mb-6 mt-6">
-                    <label htmlFor="company" className="block mb-2 text-sm font-medium text-gray-900 ">Digite o nome da sua empresa</label>
-                    <input {...register('company')} type="text" id="company" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="*" />
+                    <label htmlFor="company" className="block mb-2 text-sm font-medium text-gray-900 ">Digite o nome da sua empresa <strong>*</strong></label>
+                    <input {...register('company', { required: true })} type="text" id="company" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="*" />
+                    {errors.company && <span className='text-red-500 text-[14px]'>Campo obrigatório</span>}
+
                   </div>
                   <div className="mb-6">
-                    <label htmlFor="jobtitle" className="block mb-2 text-sm font-medium text-gray-900">Digite o seu cargo</label>
-                    <input {...register('jobtitle')} type="text" id="jobtitle" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="*" />
+                    <label htmlFor="jobtitle" className="block mb-2 text-sm font-medium text-gray-900">Digite o seu cargo <strong>*</strong></label>
+                    <input {...register('jobtitle', { required: true })} type="text" id="jobtitle" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="*" />
+                    {errors.jobtitle && <span className='text-red-500 text-[14px]'>Campo obrigatório</span>}
                   </div>
                   <div className="mb-6">
-                    <label htmlFor="firstname" className="block mb-2 text-sm font-medium text-gray-900">Digite o seu nome</label>
-                    <input {...register('firstname')} type="text" id="firstname" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="*" />
+                    <label htmlFor="firstname" className="block mb-2 text-sm font-medium text-gray-900">Digite o seu nome <strong>*</strong></label>
+                    <input {...register('firstname', { required: true })} type="text" id="firstname" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="*" />
+                    {errors.firstname && <span className='text-red-500 text-[14px]'>Campo obrigatório</span>}
                   </div>
                   <div className="mb-6">
-                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Digite o seu e-mail</label>
-                    <input {...register('email')} type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="*" />
+                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Digite o seu e-mail <strong>*</strong></label>
+                    <input {...register('email', { required: true })} type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="*" />
+                    {errors.email && <span className='text-red-500 text-[14px]'>Campo obrigatório</span>}
                   </div>
                   <div className="mb-6">
-                    <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">Digite o seu número</label>
+                    <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">Digite o seu número <strong>*</strong></label>
                     <input
-                      {...register('phone')}
+                      {...register('phone', { required: true })}
                       type="text"
                       id="phone"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -178,15 +182,18 @@ export function DialogDetailsComponent({ isOpen, closeModal }) {
                       minLength={10}
                       maxLength={11}
                     />
+                    {errors.phone && <span className='text-red-500 text-[14px]'>Campo obrigatório</span>}
                   </div>
                   <div className="mb-6">
-                    <label htmlFor="frota_total" className="block mb-2 text-sm font-medium text-gray-900">Quantidade de caminhões</label>
-                    <input defaultValue="123" {...register('frota_total')} type="number" id="frota_total" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                    <label htmlFor="frota_total" className="block mb-2 text-sm font-medium text-gray-900">Quantidade de caminhões <strong>*</strong></label>
+                    <input defaultValue="123" {...register('frota_total', { required: true })} type="number" id="frota_total" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                    {errors.frota_total && <span className='text-red-500 text-[14px]'>Campo obrigatório</span>}
                   </div>
 
                   <div className="mb-6">
-                    <label htmlFor="melhor_horario" className="block mb-2 text-sm font-medium text-gray-900">Escolha uma data</label>
-                    <input {...register('melhor_horario')} id="date" type="date" />
+                    <label htmlFor="melhor_horario" className="block mb-2 text-sm font-medium text-gray-900">Escolha uma data <strong>*</strong></label>
+                    <input {...register('melhor_horario', { required: true })} id="date" type="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                    {errors.melhor_horario && <span className='text-red-500 text-[14px]'>Campo obrigatório</span>}
                   </div>
                   <div className="mb-6">
                     <label htmlFor="frota_total" className="block mb-2 text-sm font-medium text-gray-900">Qual melhor horário?</label>
@@ -224,7 +231,6 @@ export function DialogDetailsComponent({ isOpen, closeModal }) {
                       )}
                     </div>
                   </div>
-
                   <button type="submit" className="bg-yellow-300 hover:bg-yellow-400 text-black font-medium rounded-full text-sm w-full px-5 py-2.5 text-center">Solicitar minha análise detalhada</button>
                 </form>
               </Dialog.Panel>

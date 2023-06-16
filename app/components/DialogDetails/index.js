@@ -6,66 +6,107 @@ import { Controller, useForm } from 'react-hook-form';
 import Datepicker from "react-tailwindcss-datepicker";
 
 export function DialogDetailsComponent({ isOpen, closeModal }) {
-  const { register, handleSubmit, control, formState: { errors } } = useForm();
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [checkboxError, setCheckboxError] = useState(false);
 
   const onSubmit = async (data) => {
-    if (selectedCheckboxes.length === 0) {
-      alert('Nenhum checkbox selecionado')
+    if (!data.horario1 && !data.horario2 && !data.horario3 && !data.horario4 && !data.horario5 && !data.horario6 && !data.horario7) {
+      setCheckboxError(true);
       return;
     }
-    return
     try {
-      const response = await axios.post(
-        'https://api.hsforms.com/submissions/v3/integration/submit/19655000/e875f536-e26a-4733-9375-90f4b5dcc3be',
+      const fields = [
         {
-          fields: [
-            {
-              "objectTypeId": "0-1",
-              "name": "firstname",
-              "value": data.firstname
-            },
-            {
-              "objectTypeId": "0-1",
-              "name": "company",
-              "value": data.company
-            },
-            {
-              "objectTypeId": "0-1",
-              "name": "jobtitle",
-              "value": data.jobtitle
-            },
-            {
-              "objectTypeId": "0-1",
-              "name": "email",
-              "value": data.email
-            },
-            {
-              "objectTypeId": "0-1",
-              "name": "phone",
-              "value": data.phone
-            },
-            {
-              "objectTypeId": "0-1",
-              "name": "frota_total",
-              "value": data.frota_total
-            },
-            {
-              "objectTypeId": "0-1",
-              "name": "descreve_o_principal_objetivo_da_sua_frota_empresa",
-              "value": data.descreve_o_principal_objetivo_da_sua_frota_empresa
-            },
-            {
-              "objectTypeId": "0-1",
-              "name": "qual_o_melhor_horario_",
-              "value": data.qual_o_melhor_horario_
-            },
-            {
-              "objectTypeId": "0-1",
-              "name": "horario",
-              "value": data.horario
-            },
-          ],
+          objectTypeId: "0-1",
+          name: "firstname",
+          value: data.firstname,
+        },
+        {
+          objectTypeId: "0-1",
+          name: "company",
+          value: data.company,
+        },
+        {
+          objectTypeId: "0-1",
+          name: "jobtitle",
+          value: data.jobtitle,
+        },
+        {
+          objectTypeId: "0-1",
+          name: "email",
+          value: data.email,
+        },
+        {
+          objectTypeId: "0-1",
+          name: "phone",
+          value: data.phone,
+        },
+        {
+          objectTypeId: "0-1",
+          name: "frota",
+          value: data.frota_total,
+        },
+        {
+          objectTypeId: "0-1",
+          name: "qual_o_melhor_horario_",
+          value: data.melhor_horario,
+        },
+      ];
+
+      // Adicione apenas os checkboxes selecionados aos campos
+      if (data.horario1) {
+        fields.push({
+          objectTypeId: "0-1",
+          name: "horario",
+          value: data.horario1,
+        });
+      }
+      if (data.horario2) {
+        fields.push({
+          objectTypeId: "0-1",
+          name: "horario",
+          value: data.horario2,
+        });
+      }
+      if (data.horario3) {
+        fields.push({
+          objectTypeId: "0-1",
+          name: "horario",
+          value: data.horario3,
+        });
+      }
+      if (data.horario4) {
+        fields.push({
+          objectTypeId: "0-1",
+          name: "horario",
+          value: data.horario4,
+        });
+      }
+      if (data.horario5) {
+        fields.push({
+          objectTypeId: "0-1",
+          name: "horario",
+          value: data.horario5,
+        });
+      }
+      if (data.horario6) {
+        fields.push({
+          objectTypeId: "0-1",
+          name: "horario",
+          value: data.horario6,
+        });
+      }
+      if (data.horario7) {
+        fields.push({
+          objectTypeId: "0-1",
+          name: "horario",
+          value: data.horario7,
+        });
+      }
+      const response = await axios.post(
+        'https://api.hsforms.com/submissions/v3/integration/submit/19655000/c6e932d7-a2e0-4ce7-971d-174937d2b92a',
+        {
+          fields,
           "context": {
             "pageUri": "https://calculadora.gobrax.com.br",
             "pageName": "Página de calculadora"
@@ -74,17 +115,6 @@ export function DialogDetailsComponent({ isOpen, closeModal }) {
       );
     } catch (error) {
       console.error(error);
-    }
-  };
-
-  const handleCheckboxChange = (event) => {
-    const { value, checked } = event.target;
-    if (checked) {
-      setSelectedCheckboxes((prevSelectedCheckboxes) => [...prevSelectedCheckboxes, value]);
-    } else {
-      setSelectedCheckboxes((prevSelectedCheckboxes) =>
-        prevSelectedCheckboxes.filter((checkbox) => checkbox !== value)
-      );
     }
   };
 
@@ -155,40 +185,43 @@ export function DialogDetailsComponent({ isOpen, closeModal }) {
                   </div>
 
                   <div className="mb-6">
-                    <label htmlFor="frota_total" className="block mb-2 text-sm font-medium text-gray-900">Quantidade de caminhões</label>
-                    <input {...register('frota_total')} id="date" type="date" />
+                    <label htmlFor="melhor_horario" className="block mb-2 text-sm font-medium text-gray-900">Escolha uma data</label>
+                    <input {...register('melhor_horario')} id="date" type="date" />
                   </div>
                   <div className="mb-6">
-                    <label htmlFor="frota_total" className="block mb-2 text-sm font-medium text-gray-900">Quantidade de caminhões</label>
+                    <label htmlFor="frota_total" className="block mb-2 text-sm font-medium text-gray-900">Qual melhor horário?</label>
                     <div className='row gap-2'>
                       <div class="flex items-center mr-4">
-                        <input {...register("selectedCheckboxes")} checked id="yellow-checkbox" type="checkbox" value="" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input {...register('horario1')} id="yellow-checkbox" type="checkbox" value="9:00" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label htmlFor="9:00" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">9:00</label>
                       </div>
                       <div class="flex items-center mr-4">
-                        <input {...register("selectedCheckboxes")} checked id="yellow-checkbox" type="checkbox" value="" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input {...register('horario2')} id="yellow-checkbox" type="checkbox" value="10:00" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label htmlFor="10:00" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">10:00</label>
                       </div>
                       <div class="flex items-center mr-4">
-                        <input {...register("selectedCheckboxes")} checked id="yellow-checkbox" type="checkbox" value="" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input {...register('horario3')} id="yellow-checkbox" type="checkbox" value="11:00" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label htmlFor="11:00" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">11:00</label>
                       </div>
                       <div class="flex items-center mr-4">
-                        <input {...register("selectedCheckboxes")} checked id="yellow-checkbox" type="checkbox" value="" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input {...register('horario4')} id="yellow-checkbox" type="checkbox" value="14:00" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label htmlFor="14:00" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">14:00</label>
                       </div>
                       <div class="flex items-center mr-4">
-                        <input {...register("selectedCheckboxes")} checked id="yellow-checkbox" type="checkbox" value="" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input {...register('horario5')} id="yellow-checkbox" type="checkbox" value="15:00" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label htmlFor="15:00" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">15:00</label>
                       </div>
                       <div class="flex items-center mr-4">
-                        <input {...register("selectedCheckboxes")} checked id="yellow-checkbox" type="checkbox" value="" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input {...register('horario6')} id="yellow-checkbox" type="checkbox" value="16:00" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label htmlFor="16:00" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">16:00</label>
                       </div>
                       <div class="flex items-center mr-4">
-                        <input {...register("selectedCheckboxes")} checked id="yellow-checkbox" type="checkbox" value="" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input {...register('horario7')} id="yellow-checkbox" type="checkbox" value="17:00" class="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label htmlFor="17:00" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">17:00</label>
                       </div>
+                      {checkboxError && (
+                        <p className="text-red-500 text-sm">Selecione pelo menos uma opção.</p>
+                      )}
                     </div>
                   </div>
 

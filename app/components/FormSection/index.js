@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useDebouncedCallback } from 'use-debounce';
 import ReactLoading from 'react-loading';
+import { useTrucks } from '@/app/context/trucksContext';
 
 function FormSection() {
   let INITIAL_VALUES = {
@@ -19,6 +20,7 @@ function FormSection() {
     },
   }
   const { register, watch } = useForm();
+  const { setTrucksQtt } = useTrucks()
   const [value, setValues] = useState(INITIAL_VALUES)
   const [profile, setProfile] = useState('Conservative')
   const [loading, setLoading] = useState(false)
@@ -51,6 +53,8 @@ function FormSection() {
     }
   }, 1000)
 
+  const addTrucksInContext = useDebouncedCallback(() => setTrucksQtt(trucksQttWatch), 500)
+
   const resetValues = useCallback(() => {
     setValues(INITIAL_VALUES)
     setLoading(false) 
@@ -64,6 +68,10 @@ function FormSection() {
       resetValues()
     }
   }, [dieselAmountWatch, actualAveragetWatch, trucksQttWatch, kmMonthWatch, profile, calculate, resetValues])
+
+  useEffect(() => {
+    addTrucksInContext()
+  }, [addTrucksInContext, setTrucksQtt, trucksQttWatch])
 
   return (
     <section id="calculator" className='min-h-[32rem] w-full flex bg-cover bg-center ' style={{ backgroundImage: 'url(./background-section.png)' }}>

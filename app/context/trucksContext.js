@@ -1,12 +1,14 @@
 'use client'
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const TrucksContext = createContext();
 
 const TrucksContextProvider = ({ children }) => {
   const [trucksQtt, setTrucksQtt] = useState()
   
-  console.log(trucksQtt, 'trucks')
+  useEffect(() => {
+    console.log(trucksQtt)
+  }, [trucksQtt])
   return (
     <TrucksContext.Provider  value={{trucksQtt, setTrucksQtt}}>
       {children}

@@ -3,11 +3,13 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { DialogComponent } from '../Dialog';
 import { DialogDetailsComponent } from '../DialogDetails';
+import { useTrucks } from '@/app/context/trucksContext';
 
 function ContentSection() {
   let [isOpen, setIsOpen] = useState(false)
   let [isOpenDetails, setIsOpenDetails] = useState(false)
-
+  const { trucksQtt } = useTrucks()
+  
   function closeModal() {
     setIsOpen(false)
   }
@@ -96,7 +98,7 @@ function ContentSection() {
         </div>
       </div>
       <DialogDetailsComponent isOpen={isOpen} closeModal={closeModal} />
-      <DialogComponent isOpen={isOpenDetails} closeModal={closeModalDetails} />
+      <DialogComponent isOpen={isOpenDetails} closeModal={closeModalDetails} trucks={trucksQtt} />
     </section>
   )
 }

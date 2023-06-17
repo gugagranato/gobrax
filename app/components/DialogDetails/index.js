@@ -1,14 +1,15 @@
 'use client'
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
 export function DialogDetailsComponent({ isOpen, closeModal }) {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors, isSubmitSuccessful } } = useForm();
   const [checkboxError, setCheckboxError] = useState(false);
 
   const onSubmit = async (data) => {
+    
     if (!data.horario1 && !data.horario2 && !data.horario3 && !data.horario4 && !data.horario5 && !data.horario6 && !data.horario7) {
       setCheckboxError(true);
       return;
@@ -113,11 +114,32 @@ export function DialogDetailsComponent({ isOpen, closeModal }) {
         }
       );
 
-      if (response.status === 200) {}
+      if (response.status === 200) {
+        reset()
+      }
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    isSubmitSuccessful && reset({
+      firstname: '',
+      company: '',
+      email: '',
+      phone: '',
+      frota_total: '',
+      melhor_horario: '',
+      jobtitle: '',
+      horario1: '',
+      horario2: '',
+      horario3: '',
+      horario4: '',
+      horario5: '',
+      horario6: '',
+      horario7: '',
+    })
+  }, [isSubmitSuccessful, reset])
 
   return (
     <Transition appear show={isOpen} as={Fragment}>

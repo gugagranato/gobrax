@@ -4,10 +4,11 @@ import { Dialog, Transition } from '@headlessui/react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useTrucks } from '@/app/context/trucksContext';
+import Image from 'next/image';
 
 export function DialogComponent({ isOpen, closeModal }) {
   const { register, handleSubmit, reset, setValue, formState: { errors, isSubmitSuccessful  } } = useForm();
-  const { trucksQtt } = useTrucks()
+  const { trucksQtt, setTrucksQtt } = useTrucks()
   const [success, setSuccess] = useState(false)
 
   const onSubmit = async (data) => {
@@ -67,7 +68,8 @@ export function DialogComponent({ isOpen, closeModal }) {
   };
 
   useEffect(() => {
-    isSubmitSuccessful && reset({
+    if (isSubmitSuccessful) {
+      reset({
       firstname: '',
       company: '',
       email: '',
@@ -76,6 +78,9 @@ export function DialogComponent({ isOpen, closeModal }) {
       melhor_horario: '',
       phone: ''
     })
+    setTrucksQtt('')
+  }
+
   }, [isSubmitSuccessful, reset])
 
   useEffect(() => {
@@ -111,10 +116,19 @@ export function DialogComponent({ isOpen, closeModal }) {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
+                  className="text-3xl font-medium leading-6 text-gray-900 text-center mb-6"
                 >
-                  Obrigado.
+                  Solicitação enviada!
                 </Dialog.Title>
+                <div className='flex justify-center items-center'>
+                  <Image
+                    src="/success.png"
+                    height={368}
+                    width={368}
+                    alt={'Lunardi'}
+                  />
+
+                </div>
                 </Dialog.Panel>
               ) : (
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">

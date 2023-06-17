@@ -6,9 +6,6 @@ const TrucksContext = createContext();
 const TrucksContextProvider = ({ children }) => {
   const [trucksQtt, setTrucksQtt] = useState()
   
-  useEffect(() => {
-    console.log(trucksQtt)
-  }, [trucksQtt])
   return (
     <TrucksContext.Provider  value={{trucksQtt, setTrucksQtt}}>
       {children}

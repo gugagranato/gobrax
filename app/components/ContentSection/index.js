@@ -8,8 +8,7 @@ import { useTrucks } from '@/app/context/trucksContext';
 function ContentSection() {
   let [isOpen, setIsOpen] = useState(false)
   let [isOpenDetails, setIsOpenDetails] = useState(false)
-  const { trucksQtt } = useTrucks()
-  
+
   function closeModal() {
     setIsOpen(false)
   }
@@ -98,7 +97,7 @@ function ContentSection() {
         </div>
       </div>
       <DialogDetailsComponent isOpen={isOpen} closeModal={closeModal} />
-      <DialogComponent isOpen={isOpenDetails} closeModal={closeModalDetails} trucks={trucksQtt} />
+      <DialogComponent isOpen={isOpenDetails} closeModal={closeModalDetails} />
     </section>
   )
 }

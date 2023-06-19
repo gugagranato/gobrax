@@ -78,7 +78,6 @@ export function DialogComponent({ isOpen, closeModal }) {
       melhor_horario: '',
       phone: ''
     })
-    setTrucksQtt('')
   }
 
   }, [isSubmitSuccessful, reset])

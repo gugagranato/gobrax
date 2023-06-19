@@ -145,7 +145,6 @@ export function DialogDetailsComponent({ isOpen, closeModal }) {
         horario6: '',
         horario7: '',
       })
-      setTrucksQtt('')
     }
   }, [isSubmitSuccessful, reset])
 

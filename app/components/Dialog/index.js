@@ -178,7 +178,7 @@ export function DialogComponent({ isOpen, closeModal }) {
                     </div>
                     <div className="mb-6">
                       <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900">Descreva o principal objetivo da sua frota/empresa</label>
-                      <textarea {...register('descreve_o_principal_objetivo_da_sua_frota_empresa', { required: true })} id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+                      <textarea {...register('descreve_o_principal_objetivo_da_sua_frota_empresa', { required: true })} id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Deixe seu comentário"></textarea>
                     </div>
                     <button type="submit" className="bg-yellow-300 hover:bg-yellow-400 text-black font-medium rounded-full text-sm w-full px-5 py-2.5 text-center mt-6">Solicitar minha análise detalhada</button>
                   </form>
